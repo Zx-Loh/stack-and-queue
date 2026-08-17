@@ -1,2 +1,2 @@
 all:
-gcc stack.c -o stack
+	gcc stack.c -o stack
