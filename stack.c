@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 // Linked list struct definition
 // For purposes of this stack implementation, we will consider the head of the linked list as the top of the stack
@@ -10,20 +11,24 @@ typedef struct list
 } list;
 
 
-void push(int value);
+list *push(int value, list *head);
 void pop();
 void peek();
 int empty();
-void print_stack();
+void print_stack(list *head);
 
 
 int main(void)
 {
     int option;
+ 
+    // Initialize the head of the linked list
+    list *head = NULL;
 
-    // Allows user to select 1 of 5 option
+    // Allows user to select 1 of 5 options
     while (option != 0)
     {
+        printf("0. Exit the program\n");
         printf("1. Push: Adds a value to the top of the stack.\n");
         printf("2. Pop: Removes and returns the value at the top of the stack.\n");
         printf("3. Peek: Returns the top value without removing it.\n");
@@ -31,6 +36,7 @@ int main(void)
         printf("5. Print stack: Displays the stack contents from top to bottom.\n");
         printf("Select an option by typing its number: ");
         scanf(" %i", &option);
+        printf("\n");
 
         switch (option)
         {
@@ -38,7 +44,8 @@ int main(void)
                 int value;
                 printf("Please enter the value you wish to add: ");
                 scanf(" %i", &value);
-                push(value);
+                printf("\n");
+                head = push(value, head);
                 break;
 
             case 2:
@@ -54,18 +61,23 @@ int main(void)
                 break;
         
             case 5:
-                print_stack();
+                print_stack(head);
                 break;
         }
     }
-
     return 0;
 }
 
 // Adds value to the top of the stack
-void push(int value)
+list *push(int value, list *head)
 {
-    
+    // Create list and store value
+    list *n = malloc(sizeof(list));
+    n -> value = value;
+    n -> next = head;
+ 
+    // Return new head of list
+    return n;
 }
 
 
@@ -91,7 +103,17 @@ int empty()
 
 
 // Displays the content of the whole stack from top to bottom
-void print_stack()
+void print_stack(list *head)
 {
-    
+    list *ptr = head;
+ 
+    // Iterate through the linked list while next ptr is not NULL
+    while (ptr != NULL)
+    {
+        // Print out the value of current list node
+        printf("%i\n", ptr -> value);
+
+        // Set ptr to next list node
+        ptr = ptr -> next;
+    }
 }
