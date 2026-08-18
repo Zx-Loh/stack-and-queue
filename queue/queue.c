@@ -10,9 +10,9 @@ typedef struct list
 } list;
 
 
-void enqueue(int value, list **tail, list **head);
+void enqueue(int value, list **head);
 // void pop(list **head);
-// int empty();
+int empty(list *head);
 void print_queue(list *head);
 
 
@@ -43,7 +43,7 @@ int main(void)
                 printf("Please enter the value you wish to add: ");
                 scanf(" %i", &value);
                 printf("\n");
-                enqueue(value, &head, &tail);
+                enqueue(value, &head);
                 break;
 
             // case 2:
@@ -54,40 +54,43 @@ int main(void)
                 print_queue(head);
                 break;
 
-            // case 4:
-            //     empty();
+            case 4:
+                int check = empty(head);
+                printf(" %i\n\n", check);
         }
     }
     return 0;
 }
 
 // Adds value to the top of the stack
-void enqueue(int value, list **tail, list **head)
+void enqueue(int value, list **head)
 {
     // Check if this is the first item to be added in the list
-    if (*tail == NULL)
+    if (*head == NULL)
     {
         list *n = malloc(sizeof(list));
         n -> value = value;
-        n -> next = *tail;
+        n -> next = NULL;
 
         *head = n;
-        *tail = n;
 
         return;
     }
 
-    // Initialize pointer to last object in the queue
-    list *ptr = *tail;
+    // Otherwise, go to end of list and add new node
+    list *ptr = *head;
 
-    // Create list and store value
+    while (ptr -> next != NULL)
+    {
+        ptr = ptr -> next;
+    }
+
     list *n = malloc(sizeof(list));
     n -> value = value;
     n -> next = NULL;
- 
-    // Change pointer of current tail to now point at n
+
+    // Set current last node next pointer to new node
     ptr -> next = n;
-    *tail = n;
 }
 
 // // Removes and returns the value at the top of the stack
@@ -104,18 +107,18 @@ void enqueue(int value, list **tail, list **head)
 // }
 
 
-// // Returns 1 if stack is empty, 0 otherwise
-// int empty(list *head)
-// {
-//     if (head == NULL)
-//     {
-//         return 1;
-//     }
-//     else 
-//     {
-//         return 0;
-//     }
-// }
+// Returns 1 if queue is empty, 0 otherwise
+int empty(list *head)
+{
+    if (head == NULL)
+    {
+        return 1;
+    }
+    else 
+    {
+        return 0;
+    }
+}
 
 
 // Displays the content of the queue from top to bottom
