@@ -12,8 +12,8 @@ typedef struct list
 
 
 void push(int value, list **head);
-void pop();
-void peek();
+void pop(list **head);
+void peek(list **head);
 int empty();
 void print_stack(list *head);
 
@@ -53,11 +53,12 @@ int main(void)
                 break;
 
             case 3:
-                peek();
+                peek(&head);
                 break;
             
             case 4:
-                empty();
+                value = empty(head);
+                printf("%i\n\n", value);
                 break;
         
             case 5:
@@ -96,16 +97,24 @@ void pop(list **head)
 
 
 // Returns the value at the top of the stack without removing it
-void peek()
+void peek(list **head)
 {
-    
+    list *ptr = *head;
+    printf("%i\n", ptr -> value);
 }
 
 
 // Returns 1 if stack is empty, 0 otherwise
-int empty()
+int empty(list *head)
 {
-    
+    if (head == NULL)
+    {
+        return 1;
+    }
+    else 
+    {
+        return 0;
+    }
 }
 
 
