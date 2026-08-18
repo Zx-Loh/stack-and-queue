@@ -88,7 +88,7 @@ void pop(list **head)
     list *ptr = *head;
 
     // Print value at the top of stack
-    printf("%i\n", ptr -> value);
+    printf("%i\n\n", ptr -> value);
 
     // Remove the list node at the top of the stack
     *head = ptr -> next;
@@ -100,7 +100,7 @@ void pop(list **head)
 void peek(list **head)
 {
     list *ptr = *head;
-    printf("%i\n", ptr -> value);
+    printf("%i\n\n", ptr -> value);
 }
 
 
