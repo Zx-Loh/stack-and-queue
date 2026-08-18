@@ -49,7 +49,7 @@ int main(void)
                 break;
 
             case 2:
-                pop();
+                pop(&head);
                 break;
 
             case 3:
@@ -82,9 +82,16 @@ void push(int value, list **head)
 
 
 // Removes and returns the value at the top of the stack
-void pop()
+void pop(list **head)
 {
-    
+    list *ptr = *head;
+
+    // Print value at the top of stack
+    printf("%i\n", ptr -> value);
+
+    // Remove the list node at the top of the stack
+    *head = ptr -> next;
+    free(ptr);
 }
 
 
