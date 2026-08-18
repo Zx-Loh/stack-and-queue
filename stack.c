@@ -11,7 +11,7 @@ typedef struct list
 } list;
 
 
-list *push(int value, list *head);
+void push(int value, list **head);
 void pop();
 void peek();
 int empty();
@@ -45,7 +45,7 @@ int main(void)
                 printf("Please enter the value you wish to add: ");
                 scanf(" %i", &value);
                 printf("\n");
-                head = push(value, head);
+                push(value, &head);
                 break;
 
             case 2:
@@ -69,15 +69,15 @@ int main(void)
 }
 
 // Adds value to the top of the stack
-list *push(int value, list *head)
+void push(int value, list **head)
 {
     // Create list and store value
     list *n = malloc(sizeof(list));
     n -> value = value;
-    n -> next = head;
+    n -> next = *head;
  
-    // Return new head of list
-    return n;
+    // Change pointer of head to be pointer of n
+    *head = n;    
 }
 
 
@@ -116,4 +116,6 @@ void print_stack(list *head)
         // Set ptr to next list node
         ptr = ptr -> next;
     }
+
+    printf("\n");
 }
