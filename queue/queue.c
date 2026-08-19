@@ -11,7 +11,7 @@ typedef struct list
 
 
 void enqueue(int value, list **head);
-// void pop(list **head);
+void dequeue(list **head);
 int empty(list *head);
 void print_queue(list *head);
 
@@ -46,9 +46,9 @@ int main(void)
                 enqueue(value, &head);
                 break;
 
-            // case 2:
-            //     pop(&head);
-            //     break;
+            case 2:
+                dequeue(&head);
+                break;
             
             case 3:
                 print_queue(head);
@@ -56,7 +56,7 @@ int main(void)
 
             case 4:
                 int check = empty(head);
-                printf(" %i\n\n", check);
+                printf("%i\n\n", check);
         }
     }
     return 0;
@@ -93,18 +93,18 @@ void enqueue(int value, list **head)
     ptr -> next = n;
 }
 
-// // Removes and returns the value at the top of the stack
-// void pop(list **head)
-// {
-//     list *ptr = *head;
+// Removes and returns the value at the front of the queue
+void dequeue(list **head)
+{
+    list *ptr = *head;
 
-//     // Print value at the top of stack
-//     printf("%i\n\n", ptr -> value);
+    // Print value at the top of stack
+    printf("%i\n\n", ptr -> value);
 
-//     // Remove the list node at the top of the stack
-//     *head = ptr -> next;
-//     free(ptr);
-// }
+    // Remove the list node at the top of the stack
+    *head = ptr -> next;
+    free(ptr);
+}
 
 
 // Returns 1 if queue is empty, 0 otherwise
